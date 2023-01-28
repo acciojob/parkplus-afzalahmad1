@@ -26,6 +26,12 @@ public class Spot {
         this.occupied = occupied;
     }
 
+    public Spot(SpotType spotType, int pricePerHour, boolean occupied) {
+        this.spotType = spotType;
+        this.pricePerHour = pricePerHour;
+        this.occupied = occupied;
+    }
+
     @ManyToOne
     @JoinColumn
     private ParkingLot parkingLot;
