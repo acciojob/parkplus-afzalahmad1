@@ -33,8 +33,27 @@ public class ReservationServiceImpl implements ReservationService {
         if(user == null || parkingLot == null){
             return  reservation = null;
         }
+
+        for(Spot spot : spotList){
+            if(numberOfWheels<4 && spot.getSpotType()==SpotType.TWO_WHEELER && spot.getOccupied()==false){
+                spot.setOccupied(true);
+                reservation.setSpot(spot);
+        } else if (numberOfWheels==4 && spot.getSpotType() == SpotType.FOUR_WHEELER && spot.getOccupied()==false) {
+                spot.setOccupied(true);
+                reservation.setSpot(spot);
+            }else{
+                spot.setOccupied(true);
+                reservation.setSpot(spot);
+            }
+        }
+
         reservation.setNumberOfHours(timeInHours);
         reservation.setUser(user);
+        Payment payment = new Payment();
+        payment.setReservation(reservation);
+
+        reservationRepository3.save(reservation);
+
         return reservation;
     }
 }
