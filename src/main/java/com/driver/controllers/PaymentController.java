@@ -21,6 +21,6 @@ public class PaymentController {
         //Note that the reservationId always exists
        Payment payment = paymentService.pay(reservationId,amountSent,mode);
 
-       return payment;
+       return payment=null;
     }
 }

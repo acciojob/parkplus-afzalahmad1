@@ -25,32 +25,32 @@ public class ReservationServiceImpl implements ReservationService {
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
 
         Reservation reservation = new Reservation();
-        User user = userRepository3.findById(userId).get();
+//        User user = userRepository3.findById(userId).get();
+//
+//        ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
+//
+//        List<Spot> spotList = parkingLot.getSpotList();
+//
+//        for(Spot spot : spotList){
+//            if(numberOfWheels<4 && spot.getSpotType()==SpotType.TWO_WHEELER && spot.getOccupied()==false){
+//                spot.setOccupied(true);
+//                reservation.setSpot(spot);
+//        } else if (numberOfWheels==4 && spot.getSpotType() == SpotType.FOUR_WHEELER && spot.getOccupied()==false) {
+//                spot.setOccupied(true);
+//                reservation.setSpot(spot);
+//            }else{
+//                spot.setOccupied(true);
+//                reservation.setSpot(spot);
+//            }
+//        }
+//
+//        reservation.setNumberOfHours(timeInHours);
+//        reservation.setUser(user);
+//        Payment payment = new Payment();
+//        payment.setReservation(reservation);
+//
+//        reservationRepository3.save(reservation);
 
-        ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
-
-        List<Spot> spotList = parkingLot.getSpotList();
-
-        for(Spot spot : spotList){
-            if(numberOfWheels<4 && spot.getSpotType()==SpotType.TWO_WHEELER && spot.getOccupied()==false){
-                spot.setOccupied(true);
-                reservation.setSpot(spot);
-        } else if (numberOfWheels==4 && spot.getSpotType() == SpotType.FOUR_WHEELER && spot.getOccupied()==false) {
-                spot.setOccupied(true);
-                reservation.setSpot(spot);
-            }else{
-                spot.setOccupied(true);
-                reservation.setSpot(spot);
-            }
-        }
-
-        reservation.setNumberOfHours(timeInHours);
-        reservation.setUser(user);
-        Payment payment = new Payment();
-        payment.setReservation(reservation);
-
-        reservationRepository3.save(reservation);
-
-        return reservation;
+        return reservation=null;
     }
 }
