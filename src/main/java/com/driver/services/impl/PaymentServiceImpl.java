@@ -9,6 +9,8 @@ import com.driver.services.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class PaymentServiceImpl implements PaymentService {
     @Autowired
@@ -24,7 +26,11 @@ public class PaymentServiceImpl implements PaymentService {
         if(bill>amountSent){
             throw new Exception("Insufficient Amount");
         }
-        payment.setPaymentMode(PaymentMode.valueOf(mode));
+        if(Objects.equals(mode, "cash") || Objects.equals(mode, "card") || Objects.equals(mode, "upi"))
+            payment.setPaymentMode(PaymentMode.valueOf(mode));
+        else
+            throw new Exception("Payment mode not detected");
+
         payment.setPaymentCompleted(true);
         payment.setReservation(reservation);
 
