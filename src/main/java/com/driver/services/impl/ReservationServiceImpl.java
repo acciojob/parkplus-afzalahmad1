@@ -52,7 +52,7 @@ public class ReservationServiceImpl implements ReservationService {
 
             reservationRepository3.save(reservation);
         }catch(Exception e){
-            throw new Exception("Cannot make reservation");
+            throw new Exception();
         }
 
         return reservation;

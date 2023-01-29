@@ -26,13 +26,13 @@ public class PaymentServiceImpl implements PaymentService {
             int bill = reservation.getSpot().getPricePerHour() * reservation.getNumberOfHours();
 
             if (bill > amountSent) {
-                throw new Exception("Insufficient Amount");
+                throw new Exception();
             }
 
             if (Objects.equals(mode, "CASH") || Objects.equals(mode, "CARD") || Objects.equals(mode, "UPI"))
                 payment.setPaymentMode(PaymentMode.valueOf(mode));
-            else
-                throw new Exception("Payment mode not detected");
+//            else
+//                throw new Exception("Payment mode not detected");
 
 
             payment.setPaymentCompleted(true);
