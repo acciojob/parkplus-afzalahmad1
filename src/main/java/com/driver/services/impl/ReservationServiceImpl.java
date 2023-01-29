@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservationServiceImpl implements ReservationService {
@@ -25,32 +26,39 @@ public class ReservationServiceImpl implements ReservationService {
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
 
         Reservation reservation = new Reservation();
-//        User user = userRepository3.findById(userId).get();
-//
-//        ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
-//
-//        List<Spot> spotList = parkingLot.getSpotList();
-//
-//        for(Spot spot : spotList){
-//            if(numberOfWheels<4 && spot.getSpotType()==SpotType.TWO_WHEELER && spot.getOccupied()==false){
-//                spot.setOccupied(true);
-//                reservation.setSpot(spot);
-//        } else if (numberOfWheels==4 && spot.getSpotType() == SpotType.FOUR_WHEELER && spot.getOccupied()==false) {
-//                spot.setOccupied(true);
-//                reservation.setSpot(spot);
-//            }else{
-//                spot.setOccupied(true);
-//                reservation.setSpot(spot);
-//            }
-//        }
-//
-//        reservation.setNumberOfHours(timeInHours);
-//        reservation.setUser(user);
-//        Payment payment = new Payment();
-//        payment.setReservation(reservation);
-//
-//        reservationRepository3.save(reservation);
+        User user = userRepository3.findById(userId).get();
 
-        return reservation=null;
+        ParkingLot parkingLot = parkingLotRepository3.findById(parkingLotId).get();
+
+        if(user == null || parkingLot == null){
+            return reservation = null;
+        }
+
+
+
+
+        List<Spot> spotList = parkingLot.getSpotList();
+
+        for(Spot spot : spotList){
+            if(numberOfWheels<4 && spot.getSpotType()==SpotType.TWO_WHEELER && !spot.getOccupied()){
+                spot.setOccupied(true);
+                reservation.setSpot(spot);
+        } else if (numberOfWheels==4 && spot.getSpotType() == SpotType.FOUR_WHEELER && !spot.getOccupied()) {
+                spot.setOccupied(true);
+                reservation.setSpot(spot);
+            }else if(numberOfWheels>4 && spot.getSpotType() == SpotType.OTHERS && !spot.getOccupied()){
+                spot.setOccupied(true);
+                reservation.setSpot(spot);
+            }
+        }
+
+        reservation.setNumberOfHours(timeInHours);
+        reservation.setUser(user);
+        Payment payment = new Payment();
+        payment.setReservation(reservation);
+
+        reservationRepository3.save(reservation);
+
+        return reservation;
     }
 }
