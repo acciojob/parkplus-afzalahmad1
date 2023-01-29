@@ -31,6 +31,8 @@ public class PaymentServiceImpl implements PaymentService {
 
             if (Objects.equals(mode, "CASH") || Objects.equals(mode, "CARD") || Objects.equals(mode, "UPI"))
                 payment.setPaymentMode(PaymentMode.valueOf(mode));
+            else
+                throw new Exception("Payment mode not detected");
 
 
             payment.setPaymentCompleted(true);
@@ -40,7 +42,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             paymentRepository2.save(payment);
         }catch(Exception e){
-            throw new Exception("Payment mode not detected");
+            throw new Exception();
         }
 
         return payment ;
